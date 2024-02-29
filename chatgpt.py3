@@ -5,7 +5,7 @@ import os
 import openai
 
 # Make sure to use the correct environment variable name
-apikey = os.getenv('OPENAI_API_KEY')  # Adjust this to the actual name you've used, e.g., 'OPENAI_API_KEY'
+apikey = os.getenv('OPENAI_API_KEY')  #"API Key Environment variable name"
 if apikey is None:
     print("Environment variable not found")
 else:
@@ -20,7 +20,7 @@ response = openai.chat.completions.create(
     ]
 )
 
-# Assuming you want to save the entire response as JSON, including the content of the completion
+#Save response in a json file
 with open('response.json', 'w') as file:
     json.dump(response, file, default=str)  # Use default=str to handle non-serializable data, if any
 
