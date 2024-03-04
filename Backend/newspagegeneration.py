@@ -15,9 +15,10 @@ app = Flask(__name__, template_folder=templates_dir, static_folder=static_dir)
 
 # Dummy data for a blog post
 blog_post = {
-    "title": "Blog Post Title",
-    "posted_on": "March 4, 2024",
-    "content": "This is a great blog post. It contains a lot of useful information about web development, including how to build dynamic websites using HTML, CSS, and JavaScript. Enjoy reading!"
+    "title": "News Article", #this should be extracted form the header json file
+    "posted_on": "March 4, 2024", #date
+    "content": "This is a great blog post. It contains a lot of useful information about web development, including how to build dynamic websites using HTML, CSS, and JavaScript. Enjoy reading!" #extracted from article_body.json
+    
 }
 
 @app.route("/")

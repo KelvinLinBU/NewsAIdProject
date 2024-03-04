@@ -14,16 +14,31 @@ else:
     print("Environment variable recognized")
 openai.api_key = apikey
 
-response = openai.chat.completions.create(
-    model="gpt-3.5-turbo",
+headline = openai.chat.completions.create(
+   model="gpt-3.5-turbo",
     messages=[
-        {"role": "system", "content": "You are an assistant to an unbiased journalist."}, #role of chatgpt, Will be set by the user in the future
-        {"role": "user", "content": "Write a 100 word newspaper article based on protests in downtown boston. Add quotes from mayor Bob"} #the user query
+        {"role": "system", "content": "You are an assistant to an unbiased journalist."}, #role of chatgpt, Will be set by the user in the future, to be replaced with user saved personality from the front end
+        {"role": "user", "content": "write a newsheadline on mayor bob's fraud scandal"} #the user query, this is to get the headline, to be replaced with user input from the front end
     ]
 )
 
 #Save response in a json file
-with open('response.json', 'w') as file:
-    json.dump(response, file, default=str)  # Use default=str to handle non-serializable data, if any
+with open('headline.json', 'w') as file:
+    json.dump(headline, file, default=str)  # Use default=str to handle non-serializable data, if any
 
-print("JSON object saved as response.json")
+print("JSON object saved as headline.json")
+
+article_body = openai.chat.completions.create(
+   model="gpt-3.5-turbo",
+    messages=[
+        {"role": "system", "content": "You are an assistant to an unbiased journalist."}, #role of chatgpt, Will be set by the user in the future, to be replaced with user saved personality from the front end
+        {"role": "user", "content": "write a 100 word article on mayor bob's fraud scandal"} #the user query, this is to get the article_body, to be replaced with user input from the front end
+    ]
+)
+
+#Save response in a json file
+with open('article_body.json', 'w') as file:
+    json.dump(article_body, file, default=str)  # Use default=str to handle non-serializable data, if any
+
+print("JSON object saved as article_body.json")
+
