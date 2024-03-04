@@ -4,6 +4,8 @@ import json
 import os
 import openai
 
+#run using python3 Backend/chatgpt.py
+
 # Make sure to use the correct environment variable name
 apikey = os.getenv('OPENAI_API_KEY')  #"API Key Environment variable name"
 if apikey is None:
@@ -15,8 +17,8 @@ openai.api_key = apikey
 response = openai.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Who won the World Series in 2020?"}
+        {"role": "system", "content": "You are an assistant to an unbiased journalist."}, #role of chatgpt, Will be set by the user in the future
+        {"role": "user", "content": "Write a 100 word newspaper article based on protests in downtown boston. Add quotes from mayor Bob"} #the user query
     ]
 )
 
