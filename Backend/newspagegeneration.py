@@ -21,17 +21,9 @@ app = Flask(__name__, template_folder=templates_dir, static_folder=static_dir)
 app.secret_key = flaskkey
 
 @app.route('/')
-def home():
+def newsforms():
     # Serve the submission form
     return render_template('newsformpage.html')
-
-# Dummy data for a blog post
-blog_post = {
-    "title": "News Article", #this should be extracted form the header json file
-    "posted_on": "March 4, 2024", #date
-    "content": "This is a great blog post. It contains a lot of useful information about web development, including how to build dynamic websites using HTML, CSS, and JavaScript. Enjoy reading!" #extracted from article_body.json
-    
-}
 
 @app.route('/submit-form', methods=['POST']) #find submit form
 def submitforms():
@@ -50,7 +42,12 @@ def newspage():
     print(category_style)  
     details = session.get('details', 'No Input Provided')  # Safely get details session data
     print(details)  
-    return render_template("newspage.html", post=blog_post)
+    dynamic_post = { #dynamic blog post
+        "title": f"Article in the Style of: {category_style}",  # Example title modification
+        "posted_on": "March 4, 2024",  # You might want this to be dynamic as well
+        "content": details  # Use the details from the form as the article content
+    }
+    return render_template("newspage.html", post=dynamic_post)
 
 if __name__ == "__main__":
     app.run(debug=True)
