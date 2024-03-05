@@ -11,6 +11,7 @@ def ChatGPT_determine_role(style):
     """This is the function in order tomdetermine the role of ChatGPT. Takes a string style and concatenates a starter to it"""
     result = 'You are a '
     result += style
+    result += ' who writes fictional news articles for a creative purpose'
     return result
 
 def ChatGPT_details_not_exceed(details, length):
