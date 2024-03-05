@@ -39,7 +39,8 @@ def submitforms():
     style = request.form['style']
     session['style'] = style  # Store style in session
     details = request.form['articledetails']
-    session['details'] = details #Store details in session
+    session['details'] = details #Store details in session 
+    #Want to call chatGPT here, write chatGPT helper functions
     # Redirect to the result page
     return redirect(url_for('newspage'))
 
