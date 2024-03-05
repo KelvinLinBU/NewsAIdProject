@@ -33,21 +33,21 @@ blog_post = {
     
 }
 
-@app.route('/submit-form', methods=['POST'])
+@app.route('/submit-form', methods=['POST']) #find submit form
 def submitforms():
     # Extract the submitted data and store it in session
     style = request.form['style']
-    session['style'] = style  # Store data in session
+    session['style'] = style  # Store style in session
     details = request.form['articledetails']
-    session['details'] = details
+    session['details'] = details #Store details in session
     # Redirect to the result page
     return redirect(url_for('newspage'))
 
 @app.route("/newspage")
 def newspage():
-    category_style = session.get('style', 'No Input Provided')  # Safely get session data
+    category_style = session.get('style', 'No Input Provided')  # Safely get style session data
     print(category_style)  
-    details = session.get('details', 'No Input Provided')  # Safely get session data
+    details = session.get('details', 'No Input Provided')  # Safely get details session data
     print(details)  
     return render_template("newspage.html", post=blog_post)
 
