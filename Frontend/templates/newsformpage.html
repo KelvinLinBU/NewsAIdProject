@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ post.title }}</title>
+    <title>NewsAid</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/newspagestyles.css') }}">
 </head>
 <body>
     <header>
-        <h1>My Blog</h1>
+        <h1>NewsAId</h1>
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
@@ -19,17 +19,19 @@
     </header>
     
         <form action="/submit-form" method="post"> <!--Submit style form-->
-            <label for="category">Category:</label>
-            <select id="category" name="category">
-              <option value="news">Standard News Reporter</option>  <!-- This is the standard unbiased news reporter-->
-              <option value="tutorial">Opinion Columnist</option> <!-- This is for opinion based writing-->
-              <option value="feature">Feature / Enterprise Reporter</option> <!-- This is for if you want to write a more flowery piece-->
-              <option value="investigative">Investigative Reporter</option> <!-- This is for if you want a more investigative piece-->
-              <option value="obit">Obituary Writer</option> <!-- This is for if you want to write an obituary or something more serious-->
+            <label for="style">Style:</label>
+            <select id="style" name="style">
+              <option value="Standard News Reporter">Standard News Reporter</option>  <!-- This is the standard unbiased news reporter-->
+              <option value="Opinion Columnist">Opinion Columnist</option> <!-- This is for opinion based writing-->
+              <option value="Feature / Enterprise Reporter">Feature / Enterprise Reporter</option> <!-- This is for if you want to write a more flowery piece-->
+              <option value="investigative Reporter">Investigative Reporter</option> <!-- This is for if you want a more investigative piece-->
+              <option value="Obituary Writer">Obituary Writer</option> <!-- This is for if you want to write an obituary or something more serious-->
               <!--Listicles potentially an addition for the future-->
               <!--How-to's potentially an addition for the future-->
             </select><br><br>
-            
+            <!-- Additional form field for Article Title -->
+            <label for="articledetails">Article Details:</label>
+            <input type="text" id="articledetails" name="articledetails" placeholder="Enter the details here"><br><br>  <!--Add some kind of string cleaning here in order to protect against attacks-->
             <input type="submit" value="Submit">
           </form>
 
