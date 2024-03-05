@@ -82,13 +82,17 @@ def extract_from_json_file(file_path):
 
 def extract_quoted_strings(s):
     # Regular expression pattern to find strings enclosed in \"
-    pattern = r'\\"(.*?)\\"'
+    pattern = r"content=(.*?)role='assistant'"
     
-    # Find all matches of the pattern
-    matches = re.findall(pattern, s)
+    # Use re.search to find the first occurrence of the pattern
+    match = re.search(pattern, s)
     
-    # Return the list of matched strings
-    return matches
+    # If a match is found, return the captured group (the content between the markers)
+    # If no match is found, return None or an appropriate message
+    if match:
+        return match.group(1)  # Return the first captured group (content between the markers)
+    else:
+        return "Content not found or pattern does not match."
 # Example usage
 #file_path = 'response.json'  # The path to your JSON file
 #key_path = ['choices', 0, 'message', 'content']  # The path to the desired content
