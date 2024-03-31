@@ -13,8 +13,8 @@ else:
     print("Environment variable recognized")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-templates_dir = os.path.join(BASE_DIR, 'Frontend', 'templates')
-static_dir = os.path.join(BASE_DIR, 'Frontend', 'static')
+templates_dir = os.path.join(BASE_DIR, 'templates')
+static_dir = os.path.join(BASE_DIR, 'static')
 print("Base directory:", BASE_DIR)
 print("Template directory:", templates_dir)
 print("Static directory:", static_dir)
@@ -34,7 +34,10 @@ def submitforms():
     session['style'] = style  # Store style in session
     details = request.form['articledetails']
     session['details'] = details #Store details in session 
-    
+    factorembellish = request.form['FactualorEmbellish']
+    session['FactualorEmbellish'] = factorembellish
+    articlelength = request.form['articlelength']
+    session['articlelength'] = articlelength
     #Want to call chatGPT here, write chatGPT helper functions
     # Redirect to the result page
     return redirect(url_for('newspage'))
@@ -42,11 +45,12 @@ def submitforms():
 @app.route("/newspage")
 def newspage():
     category_style = session.get('style', 'No Input Provided')  # Safely get style session data
-    
+    factorembellish = session.get('FactualorEmbellish')
     print(category_style)  
     details = session.get('details', 'No Input Provided')  # Safely get details session data
-    chatgptfuncs.ChatGPT_API_Call_for_Headline(details, category_style) #create json file with generated headline
-    chatgptfuncs.ChatGPT_API_Call_for_ArticleBody(details, category_style, 100) #create json file with generated content
+    length = session.get('articlelength')
+    chatgptfuncs.ChatGPT_API_Call_for_Headline(details, category_style,factorembellish) #create json file with generated headline
+    chatgptfuncs.ChatGPT_API_Call_for_ArticleBody(details, category_style, length, factorembellish) #create json file with generated content
     headline = chatgptfuncs.extract_from_json_file("headline.json")
     article_body = chatgptfuncs.extract_from_json_file("article_body.json")
     print(details)  
