@@ -37,8 +37,14 @@ def submitforms():
     factorembellish = request.form['FactualorEmbellish']
     session['FactualorEmbellish'] = factorembellish
     articlelength = request.form['articlelength']
+
+    # Validate the article length
+    if not articlelength.isdigit() or int(articlelength) <= 0 or int(articlelength) >= 500:
+        # Redirect back to the form page with an error message
+        return redirect(url_for('newsforms', error="Invalid article length. Please enter a positive integer value <= than 500."))
+
     session['articlelength'] = articlelength
-    #Want to call chatGPT here, write chatGPT helper functions
+    # Proceed with ChatGPT or other processing
     # Redirect to the result page
     return redirect(url_for('newspage'))
 
