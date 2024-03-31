@@ -15,5 +15,10 @@ class User:
 
         #Encrypt the password
         user['password'] = pbkdf2_sha256.encrypt(user['password'])
-        db.users.insert_one(user)
-        return jsonify(user), 200
+
+        # Check for existing email
+        if db.users.find_one({"email": user['email']}):
+            return jsonify({"error": "Email address already in use"}), 400
+        if db.users.insert_one(user):
+            return jsonify(user), 200
+        return jsonify({"error": "Signup failed"}), 400
