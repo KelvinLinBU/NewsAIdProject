@@ -29,10 +29,21 @@
               <!--Listicles potentially an addition for the future-->
               <!--How-to's potentially an addition for the future-->
             </select><br><br>
+
+            <label for="FactualorEmbellish">Factual or Embellish:</label>
+            <select id="FactualorEmbellish" name="FactualorEmbellish">
+              <option value="Factual">Keep to the Facts</option>  <!-- keep it factual-->
+              <option value="Embellish">Embellish</option> <!-- embelllish the writing-->
+            </select><br><br>
+
             <!-- Additional form field for Article Title -->
             <label for="articledetails">Article Details:</label> 
             <input type="text" id="articledetails" name="articledetails" placeholder="Enter the details here"><br><br>  <!--Add some kind of string cleaning here in order to protect against attacks-->
-            <input type="submit" value="Submit">
+            
+            <!-- Get the length -->
+             <label for="desiredlength">Desired Length:</label> 
+             <input type="number" id="articlelength" name="articlelength" placeholder="Preferred length"><br><br>  <!--Add some kind of string cleaning here in order to protect against attacks-->
+             <input type="submit" value="Submit">
           </form>
 
 
