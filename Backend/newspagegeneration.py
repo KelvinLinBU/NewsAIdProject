@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os
 import chatgptfuncs #from chatgptfuncs.py
+from datetime import datetime
 
 
 #Uses FLASK
@@ -62,10 +63,14 @@ def newspage():
     chatgptfuncs.ChatGPT_API_Call_for_ArticleBody(details, category_style, length, factorembellish) #create json file with generated content
     headline = chatgptfuncs.extract_from_json_file("headline.json")
     article_body = chatgptfuncs.extract_from_json_file("article_body.json")
+    current_date = datetime.now()
+
+# Format the date as a string (e.g., "2024-04-02")
+    date_string = current_date.strftime('%Y-%m-%d')
     print(details)  
     dynamic_post = { #dynamic blog post
         "title": headline,  # Example title modification
-        "posted_on": "March 4, 2024",  # You might want this to be dynamic as well
+        "posted_on": date_string,  # You might want this to be dynamic as well
         "content": article_body  # Use the details from the form as the article content
     }
     return render_template("newspage.html", post=dynamic_post)
