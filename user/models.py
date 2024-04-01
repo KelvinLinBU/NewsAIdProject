@@ -36,3 +36,13 @@ class User:
     def signout(self):
         session.clear()
         return redirect('/')
+    
+    # Login method
+    def login(self):
+        user = db.users.find_one({
+            "email": request.form.get('email')
+        })
+
+        if user:
+            return self.start_session(user)
+        return jsonify({"error": "Invalid login credentials"}), 401
