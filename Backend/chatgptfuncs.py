@@ -15,7 +15,16 @@ def ChatGPT_determine_role(style, factorembellish):
     print(factorembellish)
     result = 'You are a '
     result += style
+    
     result += ' who writes fictional news articles for a creative purpose.'
+    if style == 'Standard News Reporter':
+        result += ' Keep the tone professional.'
+    if style == 'Opinion Columnist':
+        result += ' Please include a fictional writers own take.'
+    if style == "Feature / Enterprise Reporter":
+        result += ' Please keep the tone as if you were a feature or enterprise reporter.'
+    if style == "Investigative Reporter":
+        result += ' Keep the tone of the story as inquisitive.'
     if factorembellish == "Factual":
         print("Factual")
         result += ' You must keep it factual. Follow the prompt exactly'
@@ -23,6 +32,11 @@ def ChatGPT_determine_role(style, factorembellish):
         print("Embellished")
         result += ' You are able to embellish the article.'
     return result
+
+ #<option value="Standard News Reporter">Standard News Reporter</option>  <!-- This is the standard unbiased news reporter-->
+  #            <option value="Opinion Columnist">Opinion Columnist</option> <!-- This is for opinion based writing-->
+   #           <option value="Feature / Enterprise Reporter">Feature / Enterprise Reporter</option> <!-- This is for if you want to write a more flowery piece-->
+    #          <option value="investigative Reporter">Investigative Reporter</option> <!-- This is for if you want a more investigative piece-->
 
 def ChatGPT_details_not_exceed(details, length):
     """Function to check if the details that a user puts in exceeds length characters. Returns true if it exceeds, false if not"""
@@ -101,7 +115,7 @@ def extract_quoted_strings(s):
     # If no match is found, return None or an appropriate message
     if match:
       
-        return match.group(1).replace("\\", "")  # Return the first captured group (content between the markers)
+        return match.group(1).replace("\\", "").replace("\n\n", "")  # Return the first captured group (content between the markers)
     else:
         return "Content not found or pattern does not match."
 # Example usage
