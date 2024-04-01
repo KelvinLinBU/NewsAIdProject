@@ -64,7 +64,7 @@ def ChatGPT_API_Call_for_ArticleBody(details, style, length, factorembellish):
         model="gpt-3.5-turbo",
         messages=[
         {"role": "system", "content": style_choice}, #role of chatgpt, Will be set by the user in the future, to be replaced with user saved personality from the front end
-        {"role": "user", "content": "Write for me a " + str(length) + "word newspaper article using the following details: " + details} #the user query, this is to get the article_body, to be replaced with user input from the front end
+        {"role": "user", "content": "Write for me a " + str(length) + "word newspaper article using the following details: " + details + ". There is no need to include a headline "} #the user query, this is to get the article_body, to be replaced with user input from the front end
     ]
 )
 #Save response in a json file
@@ -72,29 +72,16 @@ def ChatGPT_API_Call_for_ArticleBody(details, style, length, factorembellish):
         json.dump(article_body, file, default=str)  # Use default=str to handle non-serializable data, if any
     print("JSON object saved as article_body.json")
 
-def extract_generated_text(response_str):
-    # Regular expression to extract the content within 'content=' and the next single quote
-    match = re.search(r"content='(.*?)'", response_str)
-    if match:
-        return match.group(1)
-    else:
-        return None
-
 def extract_from_json_file(file_path):
     try:
         # Open and read the JSON file
         with open(file_path, 'r', encoding='utf-8') as file:
-            #json_string = file.read()  # Read the content of the file as a string
-                json_string = file.read()
-        print(json_string)
-        json_data = json.loads(json_string)
-        print(json_data)
-        #response_obj = ast.literal_eval(json_data)
+            json_string = file.read()  # Read the content of the file as a string
         
+      
         
         # Navigate through the data structure to extract the content
-        content = extract_generated_text(json_string)
-        #content = response_obj.choices[0].message.content
+        content = extract_quoted_strings(json_string)
         
         # Return the extracted content
         return content
@@ -102,3 +89,23 @@ def extract_from_json_file(file_path):
         print(f"Error extracting content: {error}")
         return None
 
+
+def extract_quoted_strings(s):
+    # Regular expression pattern to find strings enclosed in \"
+    pattern = r"content=(.*?), role='assistant'"
+    
+    # Use re.search to find the first occurrence of the pattern
+    match = re.search(pattern, s)
+    
+    # If a match is found, return the captured group (the content between the markers)
+    # If no match is found, return None or an appropriate message
+    if match:
+      
+        return match.group(1).replace("\\", "")  # Return the first captured group (content between the markers)
+    else:
+        return "Content not found or pattern does not match."
+# Example usage
+#file_path = 'response.json'  # The path to your JSON file
+#key_path = ['choices', 0, 'message', 'content']  # The path to the desired content
+#content = extract_content_from_json_file(file_path, key_path)
+#print("Extracted content:", content)
