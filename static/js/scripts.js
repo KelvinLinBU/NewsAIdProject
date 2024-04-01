@@ -10,10 +10,11 @@ $("form[name=signup_form").on("submit",function(e) {
       data: data,
       dataType: "json",
       success: function(resp) {
-        console.log(resp);
+        // redirects to dashboard if success
+        window.location.href = "/dashboard/"
       },
       error: function(resp) {
-        console.log(resp);
+        
         $error.text(resp.responseJSON.error).removeClass("error--hidden");
       }
     });
