@@ -42,7 +42,7 @@ class User:
         user = db.users.find_one({
             "email": request.form.get('email')
         })
-
-        if user:
+        # Verifies email and password with the decrypted password from database
+        if user and pbkdf2_sha256.verify(request.form.get('password'), user['password']):
             return self.start_session(user)
         return jsonify({"error": "Invalid login credentials"}), 401
