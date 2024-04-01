@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os
 import chatgptfuncs #from chatgptfuncs.py
 
@@ -25,6 +25,7 @@ app.secret_key = flaskkey
 @app.route('/')
 def newsforms():
     # Serve the submission form
+    
     return render_template('newsformpage.html')
 
 @app.route('/submit-form', methods=['POST']) #find submit form
@@ -39,9 +40,11 @@ def submitforms():
     articlelength = request.form['articlelength']
 
     # Validate the article length
-    if not articlelength.isdigit() or int(articlelength) <= 0 or int(articlelength) >= 500:
+    if not articlelength.isdigit() or int(articlelength) < 100 or int(articlelength) > 500:
         # Redirect back to the form page with an error message
-        return redirect(url_for('newsforms', error="Invalid article length. Please enter a positive integer value <= than 500."))
+        session['error'] = "Invalid article length. Please enter a positive integer value."
+        flash("Invalid article length. Please enter a positive integer value greater than or equal to 100 and less than or equal to 500.", 'error')
+        return redirect(url_for('newsforms'))
 
     session['articlelength'] = articlelength
     # Proceed with ChatGPT or other processing
