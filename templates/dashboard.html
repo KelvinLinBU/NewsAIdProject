@@ -1,4 +1,22 @@
 {% extends "base.html" %}
+<!-- Dashboard is the page after a successful login/signup -->
 {% block content %}
     <h1>Dashboard</h1>
+
+    <div class="class-wrapper">
+
+        <div class="card">
+
+            <h1 class="center">Dashboard</h1>
+            <p class="center">You are currently logged in.</p>
+
+
+            <!-- Signout button -->
+            <div class="center">
+                <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
+            </div>
+        </div>
+
+    </div>
+    
 {% endblock%}
