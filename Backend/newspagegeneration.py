@@ -62,6 +62,7 @@ def newspage():
     chatgptfuncs.ChatGPT_API_Call_for_Headline(details, category_style,factorembellish) #create json file with generated headline
     chatgptfuncs.ChatGPT_API_Call_for_ArticleBody(details, category_style, length, factorembellish) #create json file with generated content
     headline = chatgptfuncs.extract_from_json_file("headline.json")
+    chatgptfuncs.generate_picture_using_headline(headline)
     article_body = chatgptfuncs.extract_from_json_file("article_body.json")
     current_date = datetime.now()
 

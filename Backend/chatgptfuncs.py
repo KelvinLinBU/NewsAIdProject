@@ -6,7 +6,32 @@ import openai
 import re
 import ast
 
+import requests
+
 #run using python3 Backend/chatgpt.py
+def generate_picture_using_headline(headline):
+    """Uses the OpenAI API to generate an image based on the headline passed in. Saves the image as generated_image.png."""
+    try:
+        # Assuming 'openai.Image.create' is the correct method based on the latest API
+        image_response = openai.images.generate(
+            model ="dall-e-3",
+            prompt=headline,
+            n=1,  # Number of images to generate
+            size="1024x1024",  # Image size, adjust based on your requirements
+            quality="standard",
+        )
+        
+        # Assuming the first image is the one we want
+        image_url = image_response.data[0].url
+        print("Generated Image URL:", image_url)
+        
+        # Save the Image as a PNG
+        image_data = requests.get(image_url).content
+        with open("generated_image.png", "wb") as image_file:
+            image_file.write(image_data)
+        print("Image saved as generated_image.png")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 def ChatGPT_determine_role(style, factorembellish):
     """This is the function in order tomdetermine the role of ChatGPT. Takes a string style and concatenates a starter to it
@@ -34,7 +59,7 @@ def ChatGPT_determine_role(style, factorembellish):
     return result
 
  #<option value="Standard News Reporter">Standard News Reporter</option>  <!-- This is the standard unbiased news reporter-->
-  #            <option value="Opinion Columnist">Opinion Columnist</option> <!-- This is for opinion based writing-->
+#            <option value="Opinion Columnist">Opinion Columnist</option> <!-- This is for opinion based writing-->
    #           <option value="Feature / Enterprise Reporter">Feature / Enterprise Reporter</option> <!-- This is for if you want to write a more flowery piece-->
     #          <option value="investigative Reporter">Investigative Reporter</option> <!-- This is for if you want a more investigative piece-->
 
