@@ -21,6 +21,8 @@
     <article>
         <h2>{{ post.title }}</h2>
         <p>Posted on <time datetime="{{ post.posted_on }}">{{ post.posted_on }}</time></p>
+        <img src="{{ url_for('static', filename='images/generated_image.png') }}" alt="generated_image" width="200">
+
         <p>{{ post.content }}</p>
     </article>
 

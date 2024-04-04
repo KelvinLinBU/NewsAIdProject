@@ -24,14 +24,24 @@ def generate_picture_using_headline(headline):
         # Assuming the first image is the one we want
         image_url = image_response.data[0].url
         print("Generated Image URL:", image_url)
-        
-        # Save the Image as a PNG
+       
         image_data = requests.get(image_url).content
-        with open("generated_image.png", "wb") as image_file:
+        images_dir_path = os.path.join(os.getcwd(), 'static', 'images')
+        
+        # Ensure the 'images' directory exists
+        os.makedirs(images_dir_path, exist_ok=True)
+        
+        # Specify the filename for the new image
+        image_file_name = 'generated_image.png'
+        image_file_path = os.path.join(images_dir_path, image_file_name)
+        os.makedirs(images_dir_path, exist_ok=True)
+        with open(image_file_path, "wb") as image_file:
             image_file.write(image_data)
-        print("Image saved as generated_image.png")
+        print(f"Image saved as generated_image.png")
     except Exception as e:
         print(f"An error occurred: {e}")
+
+
 
 def ChatGPT_determine_role(style, factorembellish):
     """This is the function in order tomdetermine the role of ChatGPT. Takes a string style and concatenates a starter to it
