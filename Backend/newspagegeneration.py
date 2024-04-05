@@ -62,7 +62,8 @@ def newspage():
     chatgptfuncs.ChatGPT_API_Call_for_Headline(details, category_style,factorembellish) #create json file with generated headline
     chatgptfuncs.ChatGPT_API_Call_for_ArticleBody(details, category_style, length, factorembellish) #create json file with generated content
     headline = chatgptfuncs.extract_from_json_file("headline.json")
-    chatgptfuncs.generate_picture_using_headline(headline)
+    generate_headline = chatgptfuncs.generate_picture_using_headline(headline)
+
     article_body = chatgptfuncs.extract_from_json_file("article_body.json")
     current_date = datetime.now()
 
@@ -72,7 +73,8 @@ def newspage():
     dynamic_post = { #dynamic blog post
         "title": headline,  # Example title modification
         "posted_on": date_string,  # You might want this to be dynamic as well
-        "content": article_body  # Use the details from the form as the article content
+        "content": article_body,  # Use the details from the form as the article content
+        "picture": generate_headline
     }
     return render_template("newspage.html", post=dynamic_post)
 

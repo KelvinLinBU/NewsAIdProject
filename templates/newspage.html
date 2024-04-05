@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>My Blog</h1>
+        <h1>NewsAId</h1>
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
@@ -21,8 +21,12 @@
     <article>
         <h2>{{ post.title }}</h2>
         <p>Posted on <time datetime="{{ post.posted_on }}">{{ post.posted_on }}</time></p>
-        <img src="{{ url_for('static', filename='images/generated_image.png') }}" alt="generated_image" width="200">
-
+        
+        {% if post.picture %}
+    <img src="{{ url_for('static', filename='images/generated_image.png') }}" alt="generated_image" width="200">
+{% else %}
+    <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="placeholder_image" width="200">
+{% endif %}
         <p>{{ post.content }}</p>
     </article>
 

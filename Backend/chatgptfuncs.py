@@ -15,7 +15,7 @@ def generate_picture_using_headline(headline):
         # Assuming 'openai.Image.create' is the correct method based on the latest API
         image_response = openai.images.generate(
             model ="dall-e-3",
-            prompt=headline,
+            prompt=  headline,
             n=1,  # Number of images to generate
             size="1024x1024",  # Image size, adjust based on your requirements
             quality="standard",
@@ -38,8 +38,11 @@ def generate_picture_using_headline(headline):
         with open(image_file_path, "wb") as image_file:
             image_file.write(image_data)
         print(f"Image saved as generated_image.png")
+        return True
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An error occurred: {e}") #if no pic is generated, make sure theres a placeholder
+        return False
+
 
 
 
@@ -113,7 +116,7 @@ def ChatGPT_API_Call_for_ArticleBody(details, style, length, factorembellish):
         model="gpt-3.5-turbo",
         messages=[
         {"role": "system", "content": style_choice}, #role of chatgpt, Will be set by the user in the future, to be replaced with user saved personality from the front end
-        {"role": "user", "content": "Write for me a " + str(length) + "word newspaper article using the following details: " + details + ". There is no need to include a headline "} #the user query, this is to get the article_body, to be replaced with user input from the front end
+        {"role": "user", "content": "Write for me a " + str(length) + "word newspaper article using the following details: " + details + ". There is no need to include a headline. give this as a newspaper article would format an article with a ""section break"" seperating sections. Also, indicate where pictures may be appropriate with ""picture break"""} #the user query, this is to get the article_body, to be replaced with user input from the front end
     ]
 )
 #Save response in a json file
