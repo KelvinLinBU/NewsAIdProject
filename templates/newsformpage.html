@@ -42,9 +42,21 @@
             
             <!-- Get the length -->
              <label for="desiredlength">Desired Length:</label> 
-             <input type="number" id="articlelength" name="articlelength" placeholder="Preferred length"><br><br>  <!--Add some kind of string cleaning here in order to protect against attacks-->
+             <input type="number" id="articlelength" name="articlelength" placeholder="Preferred length" value="{{ session.get('articlelength', '') | safe }}"><br><br>  <!--Add some kind of string cleaning here in order to protect against attacks-->
+             
              <input type="submit" value="Submit">
+
           </form>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="{{ category }}-message">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+          
+        
 
 
 </body>

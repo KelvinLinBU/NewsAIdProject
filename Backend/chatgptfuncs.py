@@ -4,8 +4,47 @@ import json
 import os
 import openai
 import re
+import ast
+
+import requests
 
 #run using python3 Backend/chatgpt.py
+def generate_picture_using_headline(headline):
+    """Uses the OpenAI API to generate an image based on the headline passed in. Saves the image as generated_image.png."""
+    try:
+        # Assuming 'openai.Image.create' is the correct method based on the latest API
+        image_response = openai.images.generate(
+            model ="dall-e-3",
+            prompt=  headline,
+            n=1,  # Number of images to generate
+            size="1024x1024",  # Image size, adjust based on your requirements
+            quality="standard",
+        )
+        
+        # Assuming the first image is the one we want
+        image_url = image_response.data[0].url
+        print("Generated Image URL:", image_url)
+       
+        image_data = requests.get(image_url).content
+        images_dir_path = os.path.join(os.getcwd(), 'static', 'images')
+        
+        # Ensure the 'images' directory exists
+        os.makedirs(images_dir_path, exist_ok=True)
+        
+        # Specify the filename for the new image
+        image_file_name = 'generated_image.png'
+        image_file_path = os.path.join(images_dir_path, image_file_name)
+        os.makedirs(images_dir_path, exist_ok=True)
+        with open(image_file_path, "wb") as image_file:
+            image_file.write(image_data)
+        print(f"Image saved as generated_image.png")
+        return True
+    except Exception as e:
+        print(f"An error occurred: {e}") #if no pic is generated, make sure theres a placeholder
+        return False
+
+
+
 
 def ChatGPT_determine_role(style, factorembellish):
     """This is the function in order tomdetermine the role of ChatGPT. Takes a string style and concatenates a starter to it
@@ -14,7 +53,16 @@ def ChatGPT_determine_role(style, factorembellish):
     print(factorembellish)
     result = 'You are a '
     result += style
+    
     result += ' who writes fictional news articles for a creative purpose.'
+    if style == 'Standard News Reporter':
+        result += ' Keep the tone professional.'
+    if style == 'Opinion Columnist':
+        result += ' Please include a fictional writers own take.'
+    if style == "Feature / Enterprise Reporter":
+        result += ' Please keep the tone as if you were a feature or enterprise reporter.'
+    if style == "Investigative Reporter":
+        result += ' Keep the tone of the story as inquisitive.'
     if factorembellish == "Factual":
         print("Factual")
         result += ' You must keep it factual. Follow the prompt exactly'
@@ -22,6 +70,11 @@ def ChatGPT_determine_role(style, factorembellish):
         print("Embellished")
         result += ' You are able to embellish the article.'
     return result
+
+ #<option value="Standard News Reporter">Standard News Reporter</option>  <!-- This is the standard unbiased news reporter-->
+#            <option value="Opinion Columnist">Opinion Columnist</option> <!-- This is for opinion based writing-->
+   #           <option value="Feature / Enterprise Reporter">Feature / Enterprise Reporter</option> <!-- This is for if you want to write a more flowery piece-->
+    #          <option value="investigative Reporter">Investigative Reporter</option> <!-- This is for if you want a more investigative piece-->
 
 def ChatGPT_details_not_exceed(details, length):
     """Function to check if the details that a user puts in exceeds length characters. Returns true if it exceeds, false if not"""
@@ -63,7 +116,7 @@ def ChatGPT_API_Call_for_ArticleBody(details, style, length, factorembellish):
         model="gpt-3.5-turbo",
         messages=[
         {"role": "system", "content": style_choice}, #role of chatgpt, Will be set by the user in the future, to be replaced with user saved personality from the front end
-        {"role": "user", "content": "Write for me a " + str(length) + "word newspaper article using the following details: " + details} #the user query, this is to get the article_body, to be replaced with user input from the front end
+        {"role": "user", "content": "Write for me a " + str(length) + "word newspaper article using the following details: " + details + ". There is no need to include a headline. give this as a newspaper article would format an article with a ""section break"" seperating sections. Also, indicate where pictures may be appropriate with ""picture break"""} #the user query, this is to get the article_body, to be replaced with user input from the front end
     ]
 )
 #Save response in a json file
@@ -91,7 +144,7 @@ def extract_from_json_file(file_path):
 
 def extract_quoted_strings(s):
     # Regular expression pattern to find strings enclosed in \"
-    pattern = r"content=(.*?)role='assistant'"
+    pattern = r"content=(.*?), role='assistant'"
     
     # Use re.search to find the first occurrence of the pattern
     match = re.search(pattern, s)
@@ -99,7 +152,8 @@ def extract_quoted_strings(s):
     # If a match is found, return the captured group (the content between the markers)
     # If no match is found, return None or an appropriate message
     if match:
-        return match.group(1)  # Return the first captured group (content between the markers)
+      
+        return match.group(1).replace("\\", "").replace("\n\n", "")  # Return the first captured group (content between the markers)
     else:
         return "Content not found or pattern does not match."
 # Example usage
