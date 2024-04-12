@@ -16,3 +16,14 @@ To test login function run this command in the terminal
 ./run
 ```
 Then go to this link: http://127.0.0.1:5000
+
+# Running the frontend
+First install the proper node modules:
+```
+npm i
+```
+
+Now you can run the frontend:
+```
+npm run dev
+```
