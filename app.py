@@ -3,6 +3,7 @@ from functools import wraps
 import pymongo
 app = Flask(__name__)
 #generate secret key
+# WILL BE REMOVED AFTER ALPHA TESTING
 app.secret_key = b'-\x04\xfd\xbb)A\xa2\x06G\x94"f\x00+1L\x1f)'
 
 #Initiating Database to localhost
