@@ -5,5 +5,8 @@ For secret API Keys, check out shared API Keys document. If there is no keys, th
 SECRET KEYS ARE AT THE END OF THE ALPHA MILESTONE VIDEO. THEY ARE ENVIRONMENT VARIABLES.
 
 # Backend Testing
-First run this command in the terminal: python3 Backend/newspagegeneration.py
+First run this command in the terminal: 
+```
+python3 Backend/newspagegeneration.py
+```
 Then go to this link: http://127.0.0.1:5000
