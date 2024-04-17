@@ -20,3 +20,5 @@ pip3 install openai
 ```
 pip3 install requests 
 ```
+# Webshare Capability
+As of right now, works on Apple's Safari but not Google Chrome. Don't know why. 
