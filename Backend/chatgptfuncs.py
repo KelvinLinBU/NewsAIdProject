@@ -156,15 +156,15 @@ def extract_quoted_strings(s):
         cleaned_text = clean(text,
                       fix_unicode=True,               # fix various unicode errors
                       to_ascii=True,                  # transliterate to closest ASCII representation
-                      lower=False,                     # lowercase text
+                      lower=False,                     
                       no_line_breaks=True,            # fully strip line breaks as opposed to only normalizing them
-                      no_urls=False,                   # replace all URLs with a special token
-                      no_emails=True,                 # replace all email addresses with a special token
-                      no_phone_numbers=True,          # replace all phone numbers with a special token
-                      no_numbers=False,                # replace all numbers with a special token
-                      no_digits=False,                 # replace all digits with a special token
-                      no_currency_symbols=False,       # replace all currency symbols with a special token
-                      no_punct=False,                  # fully remove punctuation
+                      no_urls=False,                   
+                      no_emails=False,                 
+                      no_phone_numbers=False,          
+                      no_numbers=False,                
+                      no_digits=False,                 
+                      no_currency_symbols=False,       
+                      no_punct=False,                  
                       lang="en")
         return str(cleaned_text)  # Return corrected text as a string
     else:
