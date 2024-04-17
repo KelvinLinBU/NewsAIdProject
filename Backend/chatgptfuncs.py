@@ -1,11 +1,12 @@
 from openai import OpenAI
 from openai import Client
+from textblob import TextBlob
 import json
 import os
 import openai
 import re
 import ast
-
+from cleantext import clean
 import requests
 
 #run using python3 Backend/chatgpt.py
@@ -116,7 +117,7 @@ def ChatGPT_API_Call_for_ArticleBody(details, style, length, factorembellish):
         model="gpt-3.5-turbo",
         messages=[
         {"role": "system", "content": style_choice}, #role of chatgpt, Will be set by the user in the future, to be replaced with user saved personality from the front end
-        {"role": "user", "content": "Write for me a " + str(length) + "word newspaper article using the following details: " + details + ". There is no need to include a headline. give this as a newspaper article would format an article with a ""section break"" seperating sections. Also, indicate where pictures may be appropriate with ""picture break"""} #the user query, this is to get the article_body, to be replaced with user input from the front end
+        {"role": "user", "content": "Write for me a " + str(length) + "word newspaper article using the following details: " + details + ". There is no need to include a headline."} #the user query, this is to get the article_body, to be replaced with user input from the front end
     ]
 )
 #Save response in a json file
@@ -143,17 +144,29 @@ def extract_from_json_file(file_path):
 
 
 def extract_quoted_strings(s):
-    # Regular expression pattern to find strings enclosed in \"
+    # Regular expression pattern to find strings enclosed in the specific markers
     pattern = r"content=(.*?), role='assistant'"
     
     # Use re.search to find the first occurrence of the pattern
     match = re.search(pattern, s)
     
-    # If a match is found, return the captured group (the content between the markers)
-    # If no match is found, return None or an appropriate message
+    # If a match is found, process and correct the captured text
     if match:
-      
-        return match.group(1).replace("\\", "").replace("\n\n", "")  # Return the first captured group (content between the markers)
+        text = match.group(1).replace("\\", "").replace("\n\n", "")
+        cleaned_text = clean(text,
+                      fix_unicode=True,               # fix various unicode errors
+                      to_ascii=True,                  # transliterate to closest ASCII representation
+                      lower=False,                     # lowercase text
+                      no_line_breaks=True,            # fully strip line breaks as opposed to only normalizing them
+                      no_urls=False,                   # replace all URLs with a special token
+                      no_emails=True,                 # replace all email addresses with a special token
+                      no_phone_numbers=True,          # replace all phone numbers with a special token
+                      no_numbers=False,                # replace all numbers with a special token
+                      no_digits=False,                 # replace all digits with a special token
+                      no_currency_symbols=False,       # replace all currency symbols with a special token
+                      no_punct=False,                  # fully remove punctuation
+                      lang="en")
+        return str(cleaned_text)  # Return corrected text as a string
     else:
         return "Content not found or pattern does not match."
 # Example usage
