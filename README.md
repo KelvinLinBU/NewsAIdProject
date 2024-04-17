@@ -10,7 +10,7 @@ For secret API Keys, check out shared API Keys document. If there is no keys, th
 ```
 source ~/.venv/bin/activate
 ```
-Then, try installing...
+Then, if it still doesn't work, try installing...
 ```
 pip3 install flask 
 ```
