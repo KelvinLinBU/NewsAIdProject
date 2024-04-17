@@ -17,7 +17,30 @@
             </ul>
         </nav>
     </header>
-
+    
+    <button onclick="shareData()">Share this Article!</button>
+    <!-- For some reason, this works on Apple's Safari, but not Google Chrome -->
+    <script>
+    function shareData() {
+        var postTitle = document.querySelector('title').innerText;
+        console.log('Attempting to share...');
+        if (navigator.share) {
+            console.log('Web Share API is available.');
+            navigator.share({
+                title: postTitle,
+                text: postTitle + '\n' + "Check out my article!",
+                url: window.location.href
+            }).then(() => {
+                console.log('Thanks for sharing!');
+            })
+            .catch(err => {
+                console.log(`Couldn't share because of`, err.message);
+            });
+        } else {
+            console.log('Web Share API is not supported in this browser.');
+        }
+    }
+    </script>   
     <article>
         <h2>{{ post.title }}</h2>
         <p>Posted on <time datetime="{{ post.posted_on }}">{{ post.posted_on }}</time></p>
