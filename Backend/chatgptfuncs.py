@@ -152,7 +152,7 @@ def extract_quoted_strings(s):
     
     # If a match is found, process and correct the captured text
     if match:
-        text = match.group(1).replace("\\", "").replace("\n\n", "")
+        text = match.group(1).replace("\n\n", "").replace("\\", "").replace(".nn", ". ").replace('"nn', '" ')
         cleaned_text = clean(text,
                       fix_unicode=True,               # fix various unicode errors
                       to_ascii=True,                  # transliterate to closest ASCII representation

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ post.title.strip('"').strip("'") }}</title>
+    <title>{{ post.title.strip('"').strip("'").strip('"').strip("'")}}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/newspagestyles.css') }}">
 </head>
 <body>
@@ -42,7 +42,7 @@
     }
     </script>   
     <article>
-        <h2>{{ post.title.strip('"').strip("'") }}</h2>
+        <h2>{{ post.title.strip('"').strip("'").strip('"').strip("'") }}</h2>
         <p>Posted on <time datetime="{{ post.posted_on }}">{{ post.posted_on }}</time></p>
         
         {% if post.picture %}
@@ -50,7 +50,7 @@
 {% else %}
     <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="placeholder_image" width="200">
 {% endif %}
-        <p>{{ post.content.strip('"') }}</p>
+        <p>{{ post.content.strip('"').strip("'").strip("'").strip('"') }}</p>
     </article>
 
     <footer>
