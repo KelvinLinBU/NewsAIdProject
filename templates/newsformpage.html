@@ -7,9 +7,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/newspagestyles.css') }}">
 </head>
 <body>
+    <!--Nav Bar-->
     <header>
-        <h1>NewsAId</h1>
-        <nav>
+        <div class = "header-left">
+            <h1>NewsAId</h1>
+        </div>
+
+        <nav class = "header-right">
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
@@ -17,36 +21,108 @@
             </ul>
         </nav>
     </header>
+
+<style>
+
+/* Hide default radio button appearance */
+input[type="radio"] {
+    display: none;
+}
     
-        <form action="/submit-form" method="post"> <!--Submit style form-->
-            <label for="style">Style:</label>
-            <select id="style" name="style">
-              <option value="Standard News Reporter">Standard News Reporter</option>  <!-- This is the standard unbiased news reporter-->
-              <option value="Opinion Columnist">Opinion Columnist</option> <!-- This is for opinion based writing-->
-              <option value="Feature / Enterprise Reporter">Feature / Enterprise Reporter</option> <!-- This is for if you want to write a more flowery piece-->
-              <option value="investigative Reporter">Investigative Reporter</option> <!-- This is for if you want a more investigative piece-->
-              <option value="Obituary Writer">Obituary Writer</option> <!-- This is for if you want to write an obituary or something more serious-->
-              <!--Listicles potentially an addition for the future-->
-              <!--How-to's potentially an addition for the future-->
-            </select><br><br>
+/* Style for custom radio button */
+label.radio-button {
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #FBFBFB;
+    border: 1.8px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+    margin-inline-start: 0px;
+    margin-left: 5px;
+    text-align: center;
+     
+}
+    
+/* Style for checked custom radio button */
+input[type="radio"]:checked + label.radio-button {
+    background-color: rgb(59, 142, 219);
+    border: 1.8px solid #69696942;
+    color: #fff;
+}
 
-            <label for="FactualorEmbellish">Factual or Embellish:</label>
-            <select id="FactualorEmbellish" name="FactualorEmbellish">
-              <option value="Factual">Keep to the Facts</option>  <!-- keep it factual-->
-              <option value="Embellish">Embellish</option> <!-- embelllish the writing-->
-            </select><br><br>
+/* Style for subtitle */
+span.subtitle {
+    display: block;
+    font-size: 12px;
+    color: #666;
+}
 
-            <!-- Additional form field for Article Title -->
-            <label for="articledetails">Article Details:</label> 
-            <input type="text" id="articledetails" name="articledetails" placeholder="Enter the details here"><br><br>  <!--Add some kind of string cleaning here in order to protect against attacks-->
-            
-            <!-- Get the length -->
-             <label for="desiredlength">Desired Length:</label> 
-             <input type="number" id="articlelength" name="articlelength" placeholder="Preferred length" value="{{ session.get('articlelength', '') | safe }}"><br><br>  <!--Add some kind of string cleaning here in order to protect against attacks-->
-             
-             <input type="submit" value="Submit">
+/* Style for subtitle when radio button is checked */
+input[type="radio"]:checked + label.radio-button span.subtitle {
+    color: #fff; /* Change color to white when checked */
+}
 
-          </form>
+</style>
+</head>
+<body>
+    
+    <form action="/submit-form" method="post">
+        <!--Submit style form-->
+        <label for="style">SELECT A STYLE FOR YOUR ARTICLE: </label>
+        <br />
+        <input type="radio" id="Standard News Reporter" name="style" value="Standard News Reporter">
+        <label for="Standard News Reporter" class="radio-button">Standard News Reporter<span class="subtitle">This is the standard unbiased news reporter.</span></label>
+    
+        <input type="radio" id="Opinion Columnist" name="style" value="Opinion Columnist">
+        <label for="Opinion Columnist" class="radio-button">Opinion Columnist<span class="subtitle">This is for opinion-based writing.</span></label>
+    
+        <input type="radio" id="Feature/Enterprise Reporter" name="style" value="Feature/Enterprise Reporter">
+        <label for="Feature/Enterprise Reporter" class="radio-button">Feature/Enterprise Reporter<span class="subtitle">This is for if you want to write a more flowery piece.</span></label>
+        
+        <input type="radio" id="Investigative Reporter" name="style" value="Investigative Reporter">
+        <label for="Investigative Reporter" class="radio-button">Investigative Reporter<span class="subtitle">This is for if you want a more investigative piece.</span></label>
+
+        <input type="radio" id="Obituary Writer" name="style" value="Obituary Writer">
+        <label for="Obituary Writer" class="radio-button">Obituary Writer<span class="subtitle">This is for if you want to write an obituary or something more serious.</span></label>
+        
+        <!-- submit factual/embellish form-->
+        <br />
+        <label for="style">FACTUAL OR EMBELLISHED? </label>
+        <br />
+        <input type="radio" id="Factual" name="FactualorEmbellish" value="Factual">
+        <label for="Factual" class="radio-button">Factual<span class="subtitle">Keep it factual.</span></label>
+
+        <input type="radio" id="Embellish" name="FactualorEmbellish" value="Embellish">
+        <label for="Embellish" class="radio-button">Embellish<span class="subtitle">Embellish the writing.</span></label>
+
+        <!-- Additional form field for Article Title -->
+        <br />
+        <br />
+        <label for="articledetails">ARTICLE DETAILS: </label> 
+        <input type="text" id="articledetails" name="articledetails" placeholder="Enter details here"> <!--Add some kind of string cleaning here in order to protect against attacks-->
+
+        <br />
+        <br />
+        <!-- Get the length -->
+        <label for="desiredlength">DESIRED LENGTH:</label> 
+        <input type="number" id="articlelength" name="articlelength" placeholder="Preferred length" min="100" max = "500" value="{{ session.get('articlelength', '') | safe }}">  <!--Add some kind of string cleaning here in order to protect against attacks-->
+        
+        <br />
+        <br />
+        <input type="submit" value="Submit">
+    </form>
+    
+</body>
+</html>
+    
+
+
+
+
+
           {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {% for category, message in messages %}
