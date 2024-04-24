@@ -65,6 +65,24 @@ input[type="radio"]:checked + label.radio-button span.subtitle {
     color: #fff; /* Change color to white when checked */
 }
 
+input[type=text] {
+  width: 13%;
+  padding: 7px 10px;
+  border: 1.8px solid #ccc;
+  border-radius: 5px;
+  background-color: #FBFBFB;
+}
+
+
+input[type=number] {
+  width: 10%;
+  padding: 7px 10px;
+  border: 1.8px solid #ccc;
+  border-radius: 5px;
+  background-color: #FBFBFB;
+}
+ 
+
 </style>
 </head>
 <body>
@@ -102,7 +120,7 @@ input[type="radio"]:checked + label.radio-button span.subtitle {
         <br />
         <br />
         <label for="articledetails">ARTICLE DETAILS: </label> 
-        <input type="text" id="articledetails" name="articledetails" placeholder="Enter details here"> <!--Add some kind of string cleaning here in order to protect against attacks-->
+        <input type="text" id="articledetails" name="articledetails" placeholder="Enter details here" > <!--Add some kind of string cleaning here in order to protect against attacks-->
 
         <br />
         <br />

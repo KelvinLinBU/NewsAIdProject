@@ -22,43 +22,45 @@
         </nav>
     </header>
 
-    <button onclick="shareData()">Share this Article!</button>
-    <!-- For some reason, this works on Apple's Safari, but not Google Chrome -->
-    <script>
-    function shareData() {
-        var postTitle = document.querySelector('title').innerText;
-        console.log('Attempting to share...');
-        if (navigator.share) {
-            console.log('Web Share API is available.');
-            navigator.share({
-                title: postTitle,
-                text: postTitle + '\n' + "Check out my article!",
-                url: window.location.href
-            }).then(() => {
-                console.log('Thanks for sharing!');
-            })
-            .catch(err => {
-                console.log(`Couldn't share because of`, err.message);
-            });
-        } else {
-            console.log('Web Share API is not supported in this browser.');
-        }
-    }
-    </script>   
-
     <article>
         <div class = "article">
             <div class = "article-heading">
                 <h2 class = "post-title">{{ post.title.strip('"').strip("'").strip('"').strip("'") }}</h2>
                 <p>Posted on <time datetime="{{ post.posted_on }}">{{ post.posted_on }}</time></p>
             </div>
-            <div class = "article-picture">
-                {% if post.picture %}
-                    <img src="{{ url_for('static', filename='images/generated_image.png') }}" alt="generated_image" width="200" class="center">
-                {% else %}
-                    <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="placeholder_image" width="200" class="center">
-                {% endif %}
-            </div>
+                <div class="share-button-container">
+                    <button class="share-button" onclick="shareData()">Share this Article!</button>
+                    <!-- For some reason, this works on Apple's Safari, but not Google Chrome -->
+                    <script>
+                    function shareData() {
+                        var postTitle = document.querySelector('title').innerText;
+                        console.log('Attempting to share...');
+                        if (navigator.share) {
+                            console.log('Web Share API is available.');
+                            navigator.share({
+                                title: postTitle,
+                                text: postTitle + '\n' + "Check out my article!",
+                                url: window.location.href
+                            }).then(() => {
+                                console.log('Thanks for sharing!');
+                            })
+                            .catch(err => {
+                                console.log(`Couldn't share because of`, err.message);
+                            });
+                        } else {
+                            console.log('Web Share API is not supported in this browser.');
+                        }
+                    }
+                    </script>   
+                </div>    
+                            
+                <div class = "article-picture">
+                    {% if post.picture %}
+                        <img src="{{ url_for('static', filename='images/generated_image.png') }}" alt="generated_image" width="200" class="center">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="placeholder_image" width="200" class="center">
+                    {% endif %}
+                </div>
             
             <p>{{ post.content.strip('"').strip("'").strip("'").strip('"') }}</p>
         </div>
