@@ -7,10 +7,6 @@ import Image from "next/image";
 import Footer from "@/components/Footer";
 import LandingSteps from "@/components/steps";
 
-{
-  /* Divide more elements and put them in different components, figure out ways to change the look of the website */
-}
-
 export default function Home() {
   return (
     <>
@@ -56,7 +52,7 @@ export default function Home() {
       </MaxWidthWrapper>
 
       {/* Value Proposition */}
-      <div>
+      <div className="mb-32">
         <div className="relative isolate">
           <div className="pointer-events-none absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"></div>
           <div className="mx-auto max-w-6xl px-6 lg:px-8 ">
@@ -75,7 +71,6 @@ export default function Home() {
         </div>
       </div>
 
-      <LandingSteps />
       <Footer />
     </>
   );
