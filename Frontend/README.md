@@ -1,8 +1,13 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
+If on mac, make sure node is installed using this command...
 
-First, install the node modules:
+```bash
+arch -arm64 brew install node
+```
+
+Then, install the node modules:
 
 ```bash
 npm i
