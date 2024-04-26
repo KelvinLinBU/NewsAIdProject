@@ -32,7 +32,7 @@ export default function Home() {
               // variant: "outline",
               className: "mt-5",
             })}
-            href="http://127.0.0.1:5000/"
+            href="http://127.0.0.1:5000/account"
           >
             Get Started <ArrowRight className="ml-2 h-5 w-5" />{" "}
           </Link>

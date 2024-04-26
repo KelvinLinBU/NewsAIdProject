@@ -29,6 +29,12 @@ def newsforms():
     
     return render_template('newsformpage.html')
 
+@app.route('/account')
+def loginaccount():
+    """This is the redirection for the account"""
+    return render_template('home.html')
+
+
 @app.route('/submit-form', methods=['POST']) #find submit form
 def submitforms():
     # Extract the submitted data and store it in session
