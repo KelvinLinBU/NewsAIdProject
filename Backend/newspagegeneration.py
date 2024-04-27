@@ -23,11 +23,17 @@ print("Static directory:", static_dir)
 app = Flask(__name__, template_folder=templates_dir, static_folder=static_dir)
 app.secret_key = flaskkey
 
-@app.route('/')
+@app.route('/newsform')
 def newsforms():
     # Serve the submission form
     
     return render_template('newsformpage.html')
+
+@app.route('/account')
+def loginaccount():
+    """This is the redirection for the account"""
+    return render_template('home.html')
+
 
 @app.route('/submit-form', methods=['POST']) #find submit form
 def submitforms():
@@ -79,7 +85,7 @@ def newspage():
     return render_template("newspage.html", post=dynamic_post)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run( debug=True)
 
 
 

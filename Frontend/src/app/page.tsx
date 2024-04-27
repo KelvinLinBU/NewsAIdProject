@@ -5,7 +5,6 @@ import { buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
 
 import Footer from "@/components/Footer";
-import LandingSteps from "@/components/steps";
 
 export default function Home() {
   return (
@@ -33,7 +32,7 @@ export default function Home() {
               // variant: "outline",
               className: "mt-5",
             })}
-            href="/login"
+            href="http://127.0.0.1:5000/account"
           >
             Get Started <ArrowRight className="ml-2 h-5 w-5" />{" "}
           </Link>
