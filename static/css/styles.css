@@ -60,17 +60,17 @@ p {
 .card-wrapper {
   margin: 0 auto;
   padding: 90px 30px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   display: flex;
 }
 
 .card {
-  margin: 0 30px 60px;
+  /* margin: 0 30px 60px; */
   padding: 20px 40px;
   width: 460px;
   box-shadow: 0 8px 26px -4px rgba(0,0,0,0.15);
-  border-radius: 5px;
+  /* border-radius: 5px; */
   background: var(--white);
 }
 
@@ -90,8 +90,12 @@ p {
 
 /* Forms */
 form {
-  transition: opacity .15s ease;
+  transition: opacity .15s ease-in-out;
+
+
 }
+
+
 
 form.loading {
   pointer-events: none;
@@ -141,7 +145,7 @@ label {
 
 /* Buttons */
 .btn {
-  margin: 0 0 24px;
+  margin: 0 auto 24px;
   padding: 11px 30px 10px;
   font-size: 14px;
   line-height: 24px;
@@ -154,10 +158,13 @@ label {
   border-radius: 4px;
   outline: none;
   cursor: pointer;
-  display: inline-block;
+  display: block;
   background: var(--primary);
   transition: color .15s ease, background-color .15s ease;
+  text-align: center;
+
 }
+
 
 .btn:hover {
   background: var(--primary-dark);
