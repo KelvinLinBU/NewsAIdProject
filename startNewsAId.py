@@ -20,7 +20,7 @@ if __name__ == "__main__":
     ]
     
     run_commands_in_terminals(commands)
-    print("Everything is running!\n")
-    print("Navigate to: http://localhost:3000 to start!\n")
+    print("Everything is running!")
+    print("Navigate to: http://localhost:3000 to start!")
     print("To end program, simply just exit out of the terminals.")
 

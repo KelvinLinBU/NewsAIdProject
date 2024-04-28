@@ -15,9 +15,8 @@
 
         <nav class = "header-right">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="http://localhost:3000">Home</a></li>
+                <li><a href="http://localhost:3000/more">About</a></li>
             </ul>
         </nav>
     </header>
@@ -66,16 +65,17 @@ input[type="radio"]:checked + label.radio-button span.subtitle {
 }
 
 input[type=text] {
-  width: 13%;
+  width: 50%;
   padding: 7px 10px;
   border: 1.8px solid #ccc;
   border-radius: 5px;
+  
   background-color: #FBFBFB;
 }
 
 
 input[type=number] {
-  width: 10%;
+  width: 23%;
   padding: 7px 10px;
   border: 1.8px solid #ccc;
   border-radius: 5px;
@@ -84,10 +84,11 @@ input[type=number] {
  
 
 </style>
+
 </head>
 <body>
     
-    <form action="/submit-form" method="post">
+    <form action="/submit-form" method="post" id="newsArticleForm">
         <!--Submit style form-->
         <label for="style">SELECT A STYLE FOR YOUR ARTICLE: </label>
         <br />
@@ -104,7 +105,7 @@ input[type=number] {
         <label for="Investigative Reporter" class="radio-button">Investigative Reporter<span class="subtitle">This is for if you want a more investigative piece.</span></label>
 
         <input type="radio" id="Obituary Writer" name="style" value="Obituary Writer">
-        <label for="Obituary Writer" class="radio-button">Obituary Writer<span class="subtitle">This is for if you want to write an obituary or something more serious.</span></label>
+        <label for="Obituary Writer" class="radio-button">Obituary Writer<span class="subtitle">This is for if you want to write something more serious.</span></label>
         
         <!-- submit factual/embellish form-->
         <br />
@@ -120,18 +121,43 @@ input[type=number] {
         <br />
         <br />
         <label for="articledetails">ARTICLE DETAILS: </label> 
-        <input type="text" id="articledetails" name="articledetails" placeholder="Enter details here" > <!--Add some kind of string cleaning here in order to protect against attacks-->
-
+        <input type="text" id="articledetails" name="articledetails" placeholder="Enter details here" class="wide-input"> <!--Add some kind of string cleaning here in order to protect against attacks-->
+        
         <br />
         <br />
         <!-- Get the length -->
         <label for="desiredlength">DESIRED LENGTH:</label> 
-        <input type="number" id="articlelength" name="articlelength" placeholder="Preferred length" min="100" max = "500" value="{{ session.get('articlelength', '') | safe }}">  <!--Add some kind of string cleaning here in order to protect against attacks-->
+        <input type="number" id="articlelength" name="articlelength" placeholder="Preferred length">  <!--Add some kind of string cleaning here in order to protect against attacks-->
         
         <br />
         <br />
         <input type="submit" value="Submit">
     </form>
+    <script>
+        document.getElementById('newsArticleForm').onsubmit = function() {
+            var styleSelected = document.querySelector('input[name="style"]:checked');
+            var factualSelected = document.querySelector('input[name="FactualorEmbellish"]:checked');
+            var articleDetails = document.getElementById('articledetails').value;
+            var articleLength = document.getElementById('articlelength').value;
+        
+            // Check if all fields are filled
+            if (!styleSelected || !factualSelected || articleDetails === '' || articleLength === '') {
+                alert('Please fill out all fields before submitting.');
+                return false; // Prevent form submission
+            }
+        
+            // Parse the article length as an integer
+            var articleLengthInt = parseInt(articleLength, 10);
+        
+            // Check if the article length is a valid integer and within the specified range
+            if (!Number.isInteger(articleLengthInt) || articleLengthInt < 100 || articleLengthInt > 500) {
+                alert('Article length must be an integer between 100 and 500.');
+                return false; // Prevent form submission
+            }
+        
+            return true; // Allow form submission
+        };
+    </script>
     
 </body>
 </html>
