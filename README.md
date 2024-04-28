@@ -10,7 +10,9 @@ Introducing NewsAId, an innovative news generation tool developed by four dedica
 **Effortless Sharing:** Once your custom article is crafted, sharing it is just a click away. NewsGen AI includes built-in functionality to seamlessly distribute your news across various platforms, making it easier than ever to keep your audience informed.
 
 # How do I start?
-It's very simple! First, clone this repository, and open this in your IDE of choice. **You will need a json file from us titled client_secret.json in the NewsAIdProject directory to start** Then, run the following commands in the terminal (Note, make sure you're in the NewsAId directory). 
+It's very simple! First, clone this repository, and open this in your IDE of choice. 
+**You will need a json file from us titled client_secret.json in the NewsAIdProject directory to start.** 
+Then, run the following commands in the terminal (Note, make sure you're in the NewsAId directory). 
 ```
 python3 packagesinstall.py
 ```
