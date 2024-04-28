@@ -12,6 +12,8 @@ def install_package(package):
         return True  # Package was installed
     return False  # Package was already installed
 
+
+##### NOTE YOU MAY NEED TO INSTALL NODE, SEE README IN FRONTEND####
 def main():
     packages_to_install = [
         "google-auth",
