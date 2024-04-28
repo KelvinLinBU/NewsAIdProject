@@ -95,7 +95,7 @@ def callback():
 
     session["google_id"] = id_info.get("sub")
     session["name"] = id_info.get("name")
-    return redirect("/dashboard/")
+    return redirect("http://127.0.0.1:8000/newsform")
 
 @app.route("/logout")
 def logout():
@@ -104,10 +104,4 @@ def logout():
 
 
 
-
-@app.route('/dashboard/')
-#intercepts redirecting to dashboard with login
-@login_required
-def dashboard():
-    return render_template('newsformpage.html')
 
