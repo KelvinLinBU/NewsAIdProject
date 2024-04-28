@@ -5,9 +5,9 @@ Introducing NewsAId, an innovative news generation tool developed by four dedica
 
 **Simplicity at Its Core:** With NewsAId, creating a detailed news article is as simple as filling out a brief form. Users need only select the desired style and length, and provide a few key details about the content they want covered.
 
-**Fully Customizable Content:** Tailor your news articles to meet specific needs with adjustable user inputted parameters. Whether it’s a concise summary or an in-depth report, NewsGen AI writes with precision and flair, adhering strictly to the input parameters.
+**Fully Customizable Content:** Tailor your news articles to meet specific needs with adjustable user inputted parameters. Whether it’s a concise summary or an in-depth report, NewsAId writes with precision and flair, adhering strictly to the input parameters.
 
-**Effortless Sharing:** Once your custom article is crafted, sharing it is just a click away. NewsGen AI includes built-in functionality to seamlessly distribute your news across various platforms, making it easier than ever to keep your audience informed.
+**Effortless Sharing:** Once your custom article is crafted, sharing it is just a click away. NewsAId includes built-in functionality to seamlessly distribute your news across various platforms, making it easier than ever to keep your audience informed.
 
 # How do I start?
 It's very simple! First, clone this repository, and open this in your IDE of choice. 
