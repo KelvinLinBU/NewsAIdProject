@@ -4,14 +4,14 @@ import pymongo
 import cred
 import os
 import pathlib
-app = Flask(__name__)
+
 
 import requests 
 from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
 from pip._vendor import cachecontrol
 import google.auth.transport.requests
-
+app = Flask(__name__)
 #generate secret key
 
 app.secret_key = cred.FLASK_SECRET_KEY
@@ -25,7 +25,7 @@ flow = Flow.from_client_secrets_file(
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
 
 
-    # redirects to the callback uri func
+    # redirects to the callback uri
     redirect_uri="http://127.0.0.1:5000/callback"
 
    
@@ -46,14 +46,14 @@ def login_required(f):
             return f(*args, **kwargs)
 
         else:
-            return redirect('/')
+            return redirect('/account')
     return wrap
 
 
 
 # Routes
 from user import route 
-@app.route('/')
+@app.route('/account')
 def home():
     return render_template('home.html')
 
@@ -88,7 +88,7 @@ def callback():
 @app.route("/logout")
 def logout():
     session.clear()
-    return redirect("/")
+    return redirect("/account")
 
 
 
@@ -97,5 +97,5 @@ def logout():
 #intercepts redirecting to dashboard with login
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
+    return render_template('newsformpage.html')
 
