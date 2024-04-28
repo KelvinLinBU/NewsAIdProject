@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, redirect, request, abort
 from functools import wraps
 import pymongo
-import cred
+
 import os
 import pathlib
 
@@ -14,8 +14,20 @@ import google.auth.transport.requests
 app = Flask(__name__)
 #generate secret key
 
-app.secret_key = cred.FLASK_SECRET_KEY
-GOOGLE_CLIENT_ID = cred.GOOGLE_ID
+encryptkey = os.getenv('FLASK_SECRET_KEY')  #"API Key Environment variable name"
+if encryptkey is None:
+    print("Environment variable not found")
+else:
+    print("Environment variable recognized")
+
+app.secret_key = encryptkey
+
+google_client = os.getenv('GOOGLE_ID')  #"API Key Environment variable name"
+if google_client is None:
+    print("Environment variable not found")
+else:
+    print("Environment variable recognized")
+GOOGLE_CLIENT_ID = google_client
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
