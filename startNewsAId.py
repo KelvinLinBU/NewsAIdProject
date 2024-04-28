@@ -16,7 +16,7 @@ if __name__ == "__main__":
     commands = [
         'source ~/.venv/bin/activate && python3 Backend/newspagegeneration.py',  # Example command 1
         'source ~/.venv/bin/activate && ./run',                                  # Example command 2
-        'source ~/.venv/bin/activate && cd Frontend && npm run dev'              # Example command 3
+        'source ~/.venv/bin/activate && cd Frontend && npm i && npm run dev'              # Example command 3
     ]
     
     run_commands_in_terminals(commands)
