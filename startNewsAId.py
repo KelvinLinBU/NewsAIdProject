@@ -20,3 +20,5 @@ if __name__ == "__main__":
     ]
     
     run_commands_in_terminals(commands)
+    print("Everything is running!\n")
+    print("Navigate to: http://localhost:3000 to start!")
