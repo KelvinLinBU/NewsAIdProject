@@ -20,7 +20,7 @@ python3 startNewsAId.py
 Note: It is AI not AL! Also, these programs are designed for Apple Mac M1 laptops, so they may not work as desired on other machines. If this is the case, you may need to manually go through the code and run the commands in the two programs above. 
 These two commands will install all packages necessary, and start the program. Be sure to allow access to the terminal. 
 
-# What do I do once I'm in???
+# What do I do once I'm in?
 Navigate to http://localhost:3000 to start your NewsAId journey! From here, you will login/signup using Google Oauth or directly through us. Then, you will be redirected to a form. Pick and choose the parameters that you desire for your article. After this, you can add the information that you want in your article, and pick a length; please note that this must be a word count between 100 and 500. 
 
 # How do I quit the app?
