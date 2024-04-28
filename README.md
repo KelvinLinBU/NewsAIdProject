@@ -14,6 +14,8 @@ It's very simple! First, clone this repository, and open this in your IDE of cho
 
 **You will need a json file from us titled client_secret.json in the NewsAIdProject directory to start.** 
 
+**You will also need environment variables from us! If you do not, it will NOT work!**
+
 Then, run the following commands in the terminal (Note, make sure you're in the NewsAId directory). 
 ```
 python3 packagesinstall.py
