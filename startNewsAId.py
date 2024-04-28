@@ -13,14 +13,18 @@ def run_commands_in_terminals(commands):
 
 if __name__ == "__main__":
     # List of commands to run in separate terminals
-    commands = [
-        'source ~/.venv/bin/activate && python3 Backend/newspagegeneration.py',  # Example command 1
-        'source ~/.venv/bin/activate && ./run',                                  # Example command 2
-        'source ~/.venv/bin/activate && cd Frontend && npm i && npm run dev'              # Example command 3
+    if not os.path.exists('client_secret.json'):
+        print("You need client_secret.json!")
+    else:
+        commands = [
+            'source ~/.venv/bin/activate && python3 Backend/newspagegeneration.py',  # Example command 1
+            'source ~/.venv/bin/activate && ./run',                                  # Example command 2
+            'source ~/.venv/bin/activate && cd Frontend && npm i && npm run dev'              # Example command 3
     ]
     
-    run_commands_in_terminals(commands)
-    print("Everything is running!")
-    print("Navigate to: http://localhost:3000 to start!")
-    print("To end program, simply just exit out of the terminals.")
+        run_commands_in_terminals(commands)
+        print("Everything is running!")
+        print("Navigate to: http://localhost:3000 to start!")
+        print("To end program, simply just exit out of the terminals.")
+
 
