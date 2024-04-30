@@ -2,7 +2,7 @@
 Introducing NewsAId, an innovative news generation tool developed by four dedicated Boston University students for their CS411 project. Leveraging the powerful OpenAI API, NewsAId transforms the way news articles are created, offering unprecedented simplicity and customization.
 
 # Video Walkthrough
-(https://www.youtube.com/watch?v=B-5RWhWz2ps)
+https://www.youtube.com/watch?v=B-5RWhWz2ps
 
 # Key Features:
 
