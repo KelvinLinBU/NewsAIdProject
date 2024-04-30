@@ -13,7 +13,7 @@ $("form[name=signup_form").on("submit",function(e) {
       dataType: "json",
       success: function(resp) {
         // redirects to dashboard if success
-        window.location.href = "/dashboard/"
+        window.location.href = "http://127.0.0.1:8000/newsform"
       },
       error: function(resp) {
         
@@ -39,7 +39,7 @@ $("form[name=signup_form").on("submit",function(e) {
       dataType: "json",
       success: function(resp) {
         // redirects to dashboard if success
-        window.location.href = "/dashboard/"
+        window.location.href = "http://127.0.0.1:8000/newsform"
       },
       error: function(resp) {
         
